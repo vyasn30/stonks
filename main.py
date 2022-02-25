@@ -1,6 +1,10 @@
 from Dataset import Stock
 from datetime import datetime as dt
-from Model import Model
+from RNNModel import RNNModel
+from GRU_model import GRUModel
+from BILSTM_model import BISLTMModel
+from CNNModel import CNNModel
+# from LSTMModel import LSTMModel
 
 
 if __name__ == "__main__":
@@ -9,8 +13,11 @@ if __name__ == "__main__":
     X_train, y_train = hdfc_bank_stock.preprocess()
     print(X_train.shape)
     print(y_train.shape)
-
+    
+    model = CNNModel(X_train, y_train)
+    model.train(epochs = 15, batch_size=32)
     # model = Model(X_train, y_train)
     # model.train(epochs = 15, batch_size=32)
+
 
     hdfc_bank_stock.predict()
