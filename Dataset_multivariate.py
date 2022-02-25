@@ -49,9 +49,10 @@ class Stock:
 
     def preprocess(self):
         train_set = self.data2.iloc[:, 1:2].values
-        # print(self.data2)
-        # print(train_set)
+        print(self.data2)
+        print(train_set)
 
+    
         self.scaler = MinMaxScaler(feature_range=(1,2))
 
         train_set_scaled = self.scaler.fit_transform(train_set)
