@@ -20,7 +20,7 @@ from sklearn.metrics import mean_squared_error
 # from GRU_model import get_model
 # from BILSTM_model import get_model
 # from LSTMModel import get_model
-from Hybrid_CNNLSTM import get_model
+from Hybrid_GRU_LSTM import get_model
 
 # from CNNModel import get_model
 
