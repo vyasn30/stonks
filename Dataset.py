@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
@@ -52,7 +52,8 @@ class Stock:
         # print(self.data2)
         # print(train_set)
 
-        self.scaler = MinMaxScaler(feature_range=(1,2))
+        # self.scaler = MinMaxScaler(feature_range=(1,2))
+        self.scaler = StandardScaler()
 
         train_set_scaled = self.scaler.fit_transform(train_set)
         X_train = []
