@@ -13,7 +13,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
 from keras.layers import Dropout
-import datetime as dt
+from datetime import datetime as dt
 # from Model import Model
 from sklearn.metrics import mean_squared_error
 # from RNNModel import RNNModel
@@ -42,7 +42,8 @@ class Stock:
         self.scaler = None
         self.predeicted_stock_price = None
         self.X_train, self.y_train = self.preprocess()
-        # print(self.data2)
+        print(self.data2)
+        print(self.data2)
 
     def get_time_series(self):
         return self.data2[['Date', 'Open']].copy()
@@ -64,8 +65,11 @@ class Stock:
         
         X_train, y_train = np.array(X_train), np.array(y_train)
         X_train = np.reshape(X_train,(X_train.shape[0], X_train.shape[1], 1))
-    
-        # print(X_train, y_train)
+        print(X_train.shape)
+        print(X_train)
+        print(y_train.shape)
+        print(y_train)
+
         return X_train, y_train
 
 
@@ -128,8 +132,7 @@ class Stock:
         print("MSE ===> ", mean_squared_error(y_test, self.predicted_stock_price))
 
         plt.figure(figsize=(20,10))
-        plt.plot(y_test, color = 'green', label = 'HDFCBANK Stock Price')
-        plt.plot(self.predicted_stock_price, color = 'red', label = 'Predicted HDFCSTOCK Stock Price')
+         
         plt.title('HDFCBANK Stock Price Prediction')
         plt.xlabel('Trading Day')
         plt.ylabel('HDFCBANK Stock Price')
