@@ -9,10 +9,17 @@ class Hybrid_GRU_LSTM_model:
         self.model.add(keras.layers.Dropout(0.2))
         self.model.add(keras.layers.GRU(units = 30, return_sequences = True))
         self.model.add(keras.layers.Dropout(0.2))
+        self.model.add(keras.layers.GRU(units = 30, return_sequences = True))
+        self.model.add(keras.layers.Dropout(0.2))
+        
+        
+        self.model.add(keras.layers.LSTM(units = 30, return_sequences = True))
+        self.model.add(keras.layers.Dropout(0.2))
         self.model.add(keras.layers.LSTM(units = 30, return_sequences = True))
         self.model.add(keras.layers.Dropout(0.2))
         self.model.add(keras.layers.LSTM(units = 30))
         self.model.add(keras.layers.Dropout(0.2))
+        
         self.model.add(keras.layers.Dense(units = 5))
         self.X_train = X_train
         self.y_train = y_train

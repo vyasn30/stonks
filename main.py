@@ -16,10 +16,10 @@ if __name__ == "__main__":
     print(X_train.shape)
     print(y_train.shape)
     
-    model = Hybrid_GRU_LSTM_Model(X_train, y_train)
-    model.train(epochs = 15, batch_size=1)
-    model = Model(X_train, y_train)
-    model.train(epochs = 15, batch_size=32)
+    # model = Hybrid_GRU_LSTM_Model(X_train, y_train)
+    # model.train(epochs = 15, batch_size=1)
+    # model = Model(X_train, y_train)
+    # model.train(epochs = 15, batch_size=32)
 
 
     hdfc_bank_stock.predict()

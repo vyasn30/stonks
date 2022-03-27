@@ -10,6 +10,8 @@ from sklearn.model_selection import train_test_split
 from Hybrid_GRU_LSTM_2 import get_model
 from nsepy import get_history
 import datetime as dt
+from matplotlib import pyplot as plt
+
 
 class Dataset:
 	def __init__(self, symbol, start_date, end_date):
@@ -33,9 +35,10 @@ class Dataset:
 		self.scaler = None
 		self.predeicted_stock_price = None
 		self.X, self.y = self.preprocess()
-		self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.33)	
+		self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.4)	
 		# print(self.data2)
 		self.y_pred = None
+		self.plot_dict = dict()
 		# print(self.data2)
 # self.stk_data = self.load()
 		# self.stk_data['Date'] = self.stk_data.index
@@ -133,14 +136,33 @@ class Dataset:
 		predicted_frame_transformed = self.scaler.inverse_transform(self.y_pred)
 
 		# print(predicted_frame)
-		
+		plt.figure(figsize=(20,10))
+		plt.title('HDFCBANK Stock Price Prediction')
+		plt.xlabel('Trading Day')
+		plt.ylabel('HDFCBANK Stock Price')
+		plt.legend()
+		plt.show()
 		return self.y_pred, predicted_frame_transformed
 		
+	def plot_history(self):
+		plt.figure(figsize=(14,14))
+		plt.plot(self.stk_data['Close'])
+		for index, rows in self.data2.iterrows():
+			print(rows["Date"], rows["Close"])
+		plt.title('Historical Stock Value')
+		plt.xlabel('Date')
+		plt.ylabel('Stock Price')
+		plt.show()
+ 
 	def find_mse(self):
 
 		open_price_test = [val[0] for val in self.y_test]
 		open_price_pred = [val[0] for val in self.y_pred]
+		print(self.y_test)
 
+		self.plot_dict["open_price_test"] = open_price_test
+		self.plot_dict["open_price_pred"] = open_price_pred
+	
 		return mean_squared_error(open_price_test, open_price_pred)
 
 		
@@ -156,6 +178,7 @@ class Dataset:
 		data =  pd.concat(li, axis=0, ignore_index=True)
 		print(data)
 		return data
+
 
 if __name__ == "__main__":
 	frame = Dataset()

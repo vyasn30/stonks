@@ -132,7 +132,6 @@ class Stock:
         print("MSE ===> ", mean_squared_error(y_test, self.predicted_stock_price))
 
         plt.figure(figsize=(20,10))
-         
         plt.title('HDFCBANK Stock Price Prediction')
         plt.xlabel('Trading Day')
         plt.ylabel('HDFCBANK Stock Price')
