@@ -1,13 +1,13 @@
 from lightgbm import train
 import pandas as pd
 import glob
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 from sklearn.model_selection import train_test_split
 # from LSTM_2 import get_model
-# from GRU_model2 import get_model
-from Hybrid_GRU_LSTM_2 import get_model
+from GRU_model2 import get_model
+# from Hybrid_GRU_LSTM_2 import get_model
 from nsepy import get_history
 import datetime as dt
 from matplotlib import pyplot as plt
@@ -18,6 +18,11 @@ class Dataset:
 		self.symbol = 'HDFCBANK'
 		self.start_date = start_date
 		self.end_date = end_date
+		while True:
+			try:
+				get_history
+			except AttributeError:
+				continue
 		self.stk_data = get_history(symbol=self.symbol, start=self.start_date, end=self.end_date)
 		# print("/n fetched data")
 		# print(self.stk_data)
@@ -163,9 +168,11 @@ class Dataset:
 		self.plot_dict["open_price_test"] = open_price_test
 		self.plot_dict["open_price_pred"] = open_price_pred
 	
-		return mean_squared_error(open_price_test, open_price_pred)
-
-		
+		metrics = {"MSE": mean_squared_error(open_price_test, open_price_pred),
+        			"RMSE": mean_squared_error(open_price_test, open_price_pred, squared=False),
+					"MAE" : mean_absolute_error(open_price_pred, open_price_test)
+					}
+     		
 	def load(self):
 		path = r'data'
 		file_list = glob.glob(path + "/*.csv")
